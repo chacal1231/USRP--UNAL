@@ -14,7 +14,7 @@
     </param>
     <param>
       <key>window_size</key>
-      <value>500</value>
+      <value>1280, 1024</value>
     </param>
     <param>
       <key>category</key>
@@ -124,7 +124,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(372, 58)</value>
+      <value>(400, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -179,7 +179,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(285, 56)</value>
+      <value>(248, 51)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -230,7 +230,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(448, 355)</value>
+      <value>(712, 355)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -281,7 +281,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(94, 144)</value>
+      <value>(112, 147)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -306,6 +306,65 @@
     <param>
       <key>repeat</key>
       <value>True</value>
+    </param>
+  </block>
+  <block>
+    <key>rational_resampler_xxx</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>decim</key>
+      <value>int(88.2e3)</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>fbw</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(632, 187)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>rational_resampler_xxx_0</value>
+    </param>
+    <param>
+      <key>interp</key>
+      <value>int(2e6)</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>taps</key>
+      <value></value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>ccc</value>
     </param>
   </block>
   <block>
@@ -980,7 +1039,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(344, 171)</value>
+      <value>(904, 291)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1125,7 +1184,7 @@
   </block>
   <connection>
     <source_block_id>analog_nbfm_tx_0</source_block_id>
-    <sink_block_id>blocks_multiply_const_vxx_1</sink_block_id>
+    <sink_block_id>rational_resampler_xxx_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -1144,6 +1203,12 @@
   <connection>
     <source_block_id>blocks_wavfile_source_0</source_block_id>
     <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>rational_resampler_xxx_0</source_block_id>
+    <sink_block_id>blocks_multiply_const_vxx_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
