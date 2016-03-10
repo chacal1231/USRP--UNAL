@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <?grc format='1' created='3.7.8'?>
 <flow_graph>
-  <timestamp>Fri Mar  4 18:10:13 2016</timestamp>
+  <timestamp>Mon Mar  7 15:52:13 2016</timestamp>
   <block>
     <key>options</key>
     <param>
@@ -14,7 +14,7 @@
     </param>
     <param>
       <key>window_size</key>
-      <value>1280, 1024</value>
+      <value></value>
     </param>
     <param>
       <key>category</key>
@@ -30,11 +30,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>True</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(11, 19)</value>
+      <value>(8, 8)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>tx_FM</value>
+      <value>top_block</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -97,134 +97,28 @@
     </param>
     <param>
       <key>value</key>
-      <value>32000</value>
+      <value>2e6</value>
     </param>
   </block>
   <block>
-    <key>analog_nbfm_tx</key>
+    <key>blks2_packet_encoder</key>
     <param>
-      <key>audio_rate</key>
-      <value>int(44.1e3)</value>
-    </param>
-    <param>
-      <key>alias</key>
+      <key>access_code</key>
       <value></value>
     </param>
     <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(376, 219)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>analog_nbfm_tx_0</value>
-    </param>
-    <param>
-      <key>max_dev</key>
-      <value>5e3</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>quad_rate</key>
-      <value>int(88.2e3)</value>
-    </param>
-    <param>
-      <key>tau</key>
-      <value>75e-6</value>
-    </param>
-  </block>
-  <block>
-    <key>analog_wfm_tx</key>
-    <param>
-      <key>audio_rate</key>
-      <value>int(44.1e3)</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(392, 339)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>analog_wfm_tx_0</value>
-    </param>
-    <param>
-      <key>max_dev</key>
-      <value>75e3</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>quad_rate</key>
-      <value>int(2*44.1e3)</value>
-    </param>
-    <param>
-      <key>tau</key>
-      <value>75e-6</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_multiply_const_vxx</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>const</key>
+      <key>bits_per_symbol</key>
       <value>1</value>
     </param>
     <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
       <key>affinity</key>
       <value></value>
     </param>
@@ -234,7 +128,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 51)</value>
+      <value>(352, 147)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -242,11 +136,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_multiply_const_vxx_0</value>
+      <value>blks2_packet_encoder_0</value>
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>byte</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -255,6 +149,73 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>pad_for_usrp</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>payload_length</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>preamble</key>
+      <value></value>
+    </param>
+    <param>
+      <key>samples_per_symbol</key>
+      <value>2</value>
+    </param>
+  </block>
+  <block>
+    <key>blocks_file_source</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>file</key>
+      <value>/home/javier/txfifo.ts</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(144, 179)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_file_source_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>repeat</key>
+      <value>False</value>
     </param>
     <param>
       <key>vlen</key>
@@ -273,7 +234,7 @@
     </param>
     <param>
       <key>const</key>
-      <value>1</value>
+      <value>5e3</value>
     </param>
     <param>
       <key>affinity</key>
@@ -285,7 +246,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 355)</value>
+      <value>(752, 203)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -293,7 +254,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_multiply_const_vxx_1</value>
+      <value>blocks_multiply_const_vxx_0</value>
     </param>
     <param>
       <key>type</key>
@@ -313,7 +274,11 @@
     </param>
   </block>
   <block>
-    <key>blocks_wavfile_source</key>
+    <key>digital_gmsk_mod</key>
+    <param>
+      <key>bt</key>
+      <value>0.35</value>
+    </param>
     <param>
       <key>alias</key>
       <value></value>
@@ -331,12 +296,8 @@
       <value>True</value>
     </param>
     <param>
-      <key>file</key>
-      <value>/home/javier/Documents/Santiago/Radio FM/Andrea_Bocelli_-_Por_ti_volare.wav</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(112, 147)</value>
+      <value>(544, 155)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -344,7 +305,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_wavfile_source_0</value>
+      <value>digital_gmsk_mod_0</value>
+    </param>
+    <param>
+      <key>log</key>
+      <value>False</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -355,71 +320,12 @@
       <value>0</value>
     </param>
     <param>
-      <key>nchan</key>
-      <value>1</value>
+      <key>samples_per_symbol</key>
+      <value>2</value>
     </param>
     <param>
-      <key>repeat</key>
-      <value>True</value>
-    </param>
-  </block>
-  <block>
-    <key>rational_resampler_xxx</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>decim</key>
-      <value>int(88.2e3)</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>fbw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(624, 91)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>rational_resampler_xxx_0</value>
-    </param>
-    <param>
-      <key>interp</key>
-      <value>int(2e6)</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>taps</key>
-      <value></value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>ccc</value>
+      <key>verbose</key>
+      <value>False</value>
     </param>
   </block>
   <block>
@@ -430,7 +336,7 @@
     </param>
     <param>
       <key>ant0</key>
-      <value></value>
+      <value>TX/RX</value>
     </param>
     <param>
       <key>bw0</key>
@@ -438,7 +344,7 @@
     </param>
     <param>
       <key>center_freq0</key>
-      <value>87.5e6</value>
+      <value>1.8e9</value>
     </param>
     <param>
       <key>norm_gain0</key>
@@ -446,7 +352,7 @@
     </param>
     <param>
       <key>gain0</key>
-      <value>30</value>
+      <value>10</value>
     </param>
     <param>
       <key>ant10</key>
@@ -1094,7 +1000,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(896, 211)</value>
+      <value>(936, 171)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1218,7 +1124,7 @@
     </param>
     <param>
       <key>samp_rate</key>
-      <value>2e6</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>stream_args</key>
@@ -1238,44 +1144,26 @@
     </param>
   </block>
   <connection>
-    <source_block_id>analog_nbfm_tx_0</source_block_id>
-    <sink_block_id>rational_resampler_xxx_0</sink_block_id>
+    <source_block_id>blks2_packet_encoder_0</source_block_id>
+    <sink_block_id>digital_gmsk_mod_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>analog_wfm_tx_0</source_block_id>
-    <sink_block_id>rational_resampler_xxx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
-    <sink_block_id>analog_nbfm_tx_0</sink_block_id>
+    <source_block_id>blocks_file_source_0</source_block_id>
+    <sink_block_id>blks2_packet_encoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>blocks_multiply_const_vxx_0</source_block_id>
-    <sink_block_id>analog_wfm_tx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_multiply_const_vxx_1</source_block_id>
     <sink_block_id>uhd_usrp_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_wavfile_source_0</source_block_id>
+    <source_block_id>digital_gmsk_mod_0</source_block_id>
     <sink_block_id>blocks_multiply_const_vxx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rational_resampler_xxx_0</source_block_id>
-    <sink_block_id>blocks_multiply_const_vxx_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
