@@ -2,7 +2,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Mar 16 15:51:48 2016
+# Generated: Thu Mar 17 14:38:01 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -129,7 +129,7 @@ class top_block(grc_wxgui.top_block_gui):
         	log=False,
         )
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, variable_slider_1,True)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_float*1, "/home/javier/vivo.ts", False)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_float*1, "/home/javier/videotx.ts", False)
         self.blks2_packet_encoder_0 = grc_blks2.packet_mod_f(grc_blks2.packet_encoder(
         		samples_per_symbol=2,
         		bits_per_symbol=1,
