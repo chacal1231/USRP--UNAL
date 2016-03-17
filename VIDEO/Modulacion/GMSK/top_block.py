@@ -2,7 +2,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Mon Mar 14 12:30:19 2016
+# Generated: Wed Mar 16 15:51:48 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -15,19 +15,21 @@ if __name__ == '__main__':
         except:
             print "Warning: failed to XInitThreads()"
 
-from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import gr
+from gnuradio import uhd
 from gnuradio import wxgui
 from gnuradio.eng_option import eng_option
 from gnuradio.fft import window
 from gnuradio.filter import firdes
 from gnuradio.wxgui import fftsink2
+from gnuradio.wxgui import forms
 from grc_gnuradio import blks2 as grc_blks2
 from grc_gnuradio import wxgui as grc_wxgui
 from optparse import OptionParser
+import time
 import wx
 
 
@@ -41,11 +43,36 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 44100
+        self.variable_slider_0 = variable_slider_0 = 4e6
+        self.variable_slider_1 = variable_slider_1 = 60e3
+        self.samp_rate = samp_rate = variable_slider_0
 
         ##################################################
         # Blocks
         ##################################################
+        _variable_slider_1_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._variable_slider_1_text_box = forms.text_box(
+        	parent=self.GetWin(),
+        	sizer=_variable_slider_1_sizer,
+        	value=self.variable_slider_1,
+        	callback=self.set_variable_slider_1,
+        	label="Throttle Rate",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._variable_slider_1_slider = forms.slider(
+        	parent=self.GetWin(),
+        	sizer=_variable_slider_1_sizer,
+        	value=self.variable_slider_1,
+        	callback=self.set_variable_slider_1,
+        	minimum=0,
+        	maximum=1e6,
+        	num_steps=100,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.Add(_variable_slider_1_sizer)
         self.wxgui_fftsink2_0 = fftsink2.fft_sink_c(
         	self.GetWin(),
         	baseband_freq=0,
@@ -62,23 +89,47 @@ class top_block(grc_wxgui.top_block_gui):
         	peak_hold=False,
         )
         self.Add(self.wxgui_fftsink2_0.win)
+        _variable_slider_0_sizer = wx.BoxSizer(wx.VERTICAL)
+        self._variable_slider_0_text_box = forms.text_box(
+        	parent=self.GetWin(),
+        	sizer=_variable_slider_0_sizer,
+        	value=self.variable_slider_0,
+        	callback=self.set_variable_slider_0,
+        	label="Sample rate ",
+        	converter=forms.float_converter(),
+        	proportion=0,
+        )
+        self._variable_slider_0_slider = forms.slider(
+        	parent=self.GetWin(),
+        	sizer=_variable_slider_0_sizer,
+        	value=self.variable_slider_0,
+        	callback=self.set_variable_slider_0,
+        	minimum=0,
+        	maximum=10e6,
+        	num_steps=100,
+        	style=wx.SL_HORIZONTAL,
+        	cast=float,
+        	proportion=1,
+        )
+        self.Add(_variable_slider_0_sizer)
+        self.uhd_usrp_sink_0 = uhd.usrp_sink(
+        	",".join(("", "")),
+        	uhd.stream_args(
+        		cpu_format="fc32",
+        		channels=range(1),
+        	),
+        )
+        self.uhd_usrp_sink_0.set_samp_rate(samp_rate)
+        self.uhd_usrp_sink_0.set_center_freq(2e9, 0)
+        self.uhd_usrp_sink_0.set_gain(30, 0)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=2,
         	bt=0.35,
         	verbose=False,
         	log=False,
         )
-        self.digital_gmsk_demod_0 = digital.gmsk_demod(
-        	samples_per_symbol=2,
-        	gain_mu=0.175,
-        	mu=0.5,
-        	omega_relative_limit=0.005,
-        	freq_error=0.0,
-        	verbose=False,
-        	log=False,
-        )
-        self.blocks_wavfile_source_0 = blocks.wavfile_source("/home/javier/Desktop/FM_TX_RX/Andrea_Bocelli_-_Por_ti_volare.wav", True)
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, samp_rate,True)
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, variable_slider_1,True)
+        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_float*1, "/home/javier/vivo.ts", False)
         self.blks2_packet_encoder_0 = grc_blks2.packet_mod_f(grc_blks2.packet_encoder(
         		samples_per_symbol=2,
         		bits_per_symbol=1,
@@ -88,32 +139,41 @@ class top_block(grc_wxgui.top_block_gui):
         	),
         	payload_length=0,
         )
-        self.blks2_packet_decoder_0 = grc_blks2.packet_demod_f(grc_blks2.packet_decoder(
-        		access_code="",
-        		threshold=-1,
-        		callback=lambda ok, payload: self.blks2_packet_decoder_0.recv_pkt(ok, payload),
-        	),
-        )
-        self.audio_sink_0 = audio.sink(samp_rate, "", True)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blks2_packet_decoder_0, 0), (self.audio_sink_0, 0))    
         self.connect((self.blks2_packet_encoder_0, 0), (self.digital_gmsk_mod_0, 0))    
+        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))    
         self.connect((self.blocks_throttle_0, 0), (self.blks2_packet_encoder_0, 0))    
-        self.connect((self.blocks_wavfile_source_0, 0), (self.blocks_throttle_0, 0))    
-        self.connect((self.digital_gmsk_demod_0, 0), (self.blks2_packet_decoder_0, 0))    
-        self.connect((self.digital_gmsk_mod_0, 0), (self.digital_gmsk_demod_0, 0))    
+        self.connect((self.digital_gmsk_mod_0, 0), (self.uhd_usrp_sink_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.wxgui_fftsink2_0, 0))    
 
+
+    def get_variable_slider_0(self):
+        return self.variable_slider_0
+
+    def set_variable_slider_0(self, variable_slider_0):
+        self.variable_slider_0 = variable_slider_0
+        self.set_samp_rate(self.variable_slider_0)
+        self._variable_slider_0_slider.set_value(self.variable_slider_0)
+        self._variable_slider_0_text_box.set_value(self.variable_slider_0)
+
+    def get_variable_slider_1(self):
+        return self.variable_slider_1
+
+    def set_variable_slider_1(self, variable_slider_1):
+        self.variable_slider_1 = variable_slider_1
+        self._variable_slider_1_slider.set_value(self.variable_slider_1)
+        self._variable_slider_1_text_box.set_value(self.variable_slider_1)
+        self.blocks_throttle_0.set_sample_rate(self.variable_slider_1)
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
+        self.uhd_usrp_sink_0.set_samp_rate(self.samp_rate)
         self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
 
 
