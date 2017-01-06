@@ -1,15 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.8'?>
+<?grc format='1' created='3.7.9'?>
 <flow_graph>
   <timestamp>Mon Mar 14 12:15:13 2016</timestamp>
   <block>
     <key>options</key>
     <param>
       <key>author</key>
-      <value></value>
-    </param>
-    <param>
-      <key>alias</key>
       <value></value>
     </param>
     <param>
@@ -45,6 +41,10 @@
       <value>wx_gui</value>
     </param>
     <param>
+      <key>hier_block_src_path</key>
+      <value>.:</value>
+    </param>
+    <param>
       <key>id</key>
       <value>top_block</value>
     </param>
@@ -53,8 +53,16 @@
       <value>0</value>
     </param>
     <param>
+      <key>qt_qss_theme</key>
+      <value></value>
+    </param>
+    <param>
       <key>realtime_scheduling</key>
       <value></value>
+    </param>
+    <param>
+      <key>run_command</key>
+      <value>{python} -u {filename}</value>
     </param>
     <param>
       <key>run_options</key>
@@ -101,53 +109,6 @@
     </param>
   </block>
   <block>
-    <key>audio_sink</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>device_name</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(216, 267)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>audio_sink_0</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>ok_to_block</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>samp_rate</key>
-      <value>samp_rate</value>
-    </param>
-  </block>
-  <block>
     <key>blks2_packet_decoder</key>
     <param>
       <key>access_code</key>
@@ -191,7 +152,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>complex</value>
     </param>
     <param>
       <key>threshold</key>
@@ -238,7 +199,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>complex</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -266,7 +227,11 @@
     </param>
   </block>
   <block>
-    <key>blocks_throttle</key>
+    <key>blks2_tcp_sink</key>
+    <param>
+      <key>addr</key>
+      <value>127.0.0.1</value>
+    </param>
     <param>
       <key>alias</key>
       <value></value>
@@ -285,35 +250,27 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(360, 131)</value>
+      <value>(208, 251)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_throttle_0</value>
-    </param>
-    <param>
-      <key>ignoretag</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>samp_rate</value>
+      <value>blks2_tcp_sink_0</value>
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>server</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>1234</value>
     </param>
     <param>
       <key>vlen</key>
@@ -321,7 +278,11 @@
     </param>
   </block>
   <block>
-    <key>blocks_wavfile_source</key>
+    <key>blks2_tcp_source</key>
+    <param>
+      <key>addr</key>
+      <value>127.0.0.1</value>
+    </param>
     <param>
       <key>alias</key>
       <value></value>
@@ -339,12 +300,8 @@
       <value>True</value>
     </param>
     <param>
-      <key>file</key>
-      <value>/home/javier/Desktop/FM_TX_RX/Andrea_Bocelli_-_Por_ti_volare.wav</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(144, 123)</value>
+      <value>(216, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -352,7 +309,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_wavfile_source_0</value>
+      <value>blks2_tcp_source_0</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -363,12 +320,20 @@
       <value>0</value>
     </param>
     <param>
-      <key>nchan</key>
-      <value>1</value>
+      <key>server</key>
+      <value>True</value>
     </param>
     <param>
-      <key>repeat</key>
-      <value>True</value>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>1234</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
     </param>
   </block>
   <block>
@@ -598,7 +563,7 @@
   </block>
   <connection>
     <source_block_id>blks2_packet_decoder_0</source_block_id>
-    <sink_block_id>audio_sink_0</sink_block_id>
+    <sink_block_id>blks2_tcp_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -609,14 +574,8 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_throttle_0</source_block_id>
+    <source_block_id>blks2_tcp_source_0</source_block_id>
     <sink_block_id>blks2_packet_encoder_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_wavfile_source_0</source_block_id>
-    <sink_block_id>blocks_throttle_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

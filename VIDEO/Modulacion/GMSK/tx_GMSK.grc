@@ -1,15 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.8'?>
+<?grc format='1' created='3.7.9'?>
 <flow_graph>
   <timestamp>Mon Mar 14 12:37:31 2016</timestamp>
   <block>
     <key>options</key>
     <param>
       <key>author</key>
-      <value></value>
-    </param>
-    <param>
-      <key>alias</key>
       <value></value>
     </param>
     <param>
@@ -45,6 +41,10 @@
       <value>wx_gui</value>
     </param>
     <param>
+      <key>hier_block_src_path</key>
+      <value>.:</value>
+    </param>
+    <param>
       <key>id</key>
       <value>top_block</value>
     </param>
@@ -53,8 +53,16 @@
       <value>0</value>
     </param>
     <param>
+      <key>qt_qss_theme</key>
+      <value></value>
+    </param>
+    <param>
       <key>realtime_scheduling</key>
       <value></value>
+    </param>
+    <param>
+      <key>run_command</key>
+      <value>{python} -u {filename}</value>
     </param>
     <param>
       <key>run_options</key>
@@ -112,7 +120,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>4e6</value>
+      <value>10e6</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -140,7 +148,7 @@
     </param>
     <param>
       <key>max</key>
-      <value>10e6</value>
+      <value>100e6</value>
     </param>
     <param>
       <key>min</key>
@@ -242,7 +250,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -258,7 +266,7 @@
     </param>
     <param>
       <key>type</key>
-      <value>float</value>
+      <value>int</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -286,7 +294,7 @@
     </param>
   </block>
   <block>
-    <key>blocks_file_source</key>
+    <key>blocks_udp_source</key>
     <param>
       <key>alias</key>
       <value></value>
@@ -304,12 +312,8 @@
       <value>True</value>
     </param>
     <param>
-      <key>file</key>
-      <value>/home/javier/videotx.ts</value>
-    </param>
-    <param>
       <key>_coordinate</key>
-      <value>(64, 288)</value>
+      <value>(120, 195)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -317,7 +321,11 @@
     </param>
     <param>
       <key>id</key>
-      <value>blocks_file_source_0</value>
+      <value>blocks_udp_source_0</value>
+    </param>
+    <param>
+      <key>ipaddr</key>
+      <value>127.0.0.1</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -328,67 +336,20 @@
       <value>0</value>
     </param>
     <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>repeat</key>
+      <key>eof</key>
       <value>False</value>
     </param>
     <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_throttle</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(272, 299)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_throttle_0</value>
-    </param>
-    <param>
-      <key>ignoretag</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>samples_per_second</key>
-      <value>variable_slider_1</value>
-    </param>
-    <param>
       <key>type</key>
-      <value>float</value>
+      <value>int</value>
+    </param>
+    <param>
+      <key>psize</key>
+      <value>1500</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>1234</value>
     </param>
     <param>
       <key>vlen</key>
@@ -399,7 +360,7 @@
     <key>digital_gmsk_mod</key>
     <param>
       <key>bt</key>
-      <value>0.35</value>
+      <value>100</value>
     </param>
     <param>
       <key>alias</key>
@@ -415,7 +376,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -458,7 +419,7 @@
     </param>
     <param>
       <key>ant0</key>
-      <value></value>
+      <value>TX/RX</value>
     </param>
     <param>
       <key>bw0</key>
@@ -466,7 +427,7 @@
     </param>
     <param>
       <key>center_freq0</key>
-      <value>2e9</value>
+      <value>4E9</value>
     </param>
     <param>
       <key>norm_gain0</key>
@@ -474,7 +435,7 @@
     </param>
     <param>
       <key>gain0</key>
-      <value>30</value>
+      <value>10</value>
     </param>
     <param>
       <key>ant10</key>
@@ -1118,7 +1079,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -1135,10 +1096,6 @@
     <param>
       <key>type</key>
       <value>fc32</value>
-    </param>
-    <param>
-      <key>len_tag_name</key>
-      <value></value>
     </param>
     <param>
       <key>clock_source0</key>
@@ -1249,6 +1206,10 @@
       <value>samp_rate</value>
     </param>
     <param>
+      <key>hide_cmd_port</key>
+      <value>False</value>
+    </param>
+    <param>
       <key>stream_args</key>
       <value></value>
     </param>
@@ -1258,6 +1219,10 @@
     </param>
     <param>
       <key>sync</key>
+      <value></value>
+    </param>
+    <param>
+      <key>len_tag_name</key>
       <value></value>
     </param>
     <param>
@@ -1293,7 +1258,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>fft_size</key>
@@ -1375,13 +1340,7 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_file_source_0</source_block_id>
-    <sink_block_id>blocks_throttle_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_throttle_0</source_block_id>
+    <source_block_id>blocks_udp_source_0</source_block_id>
     <sink_block_id>blks2_packet_encoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>

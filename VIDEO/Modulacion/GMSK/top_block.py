@@ -1,8 +1,9 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Mar 17 14:38:01 2016
+# Generated: Tue Jun  7 14:32:34 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -43,13 +44,29 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Variables
         ##################################################
-        self.variable_slider_0 = variable_slider_0 = 4e6
+        self.variable_slider_0 = variable_slider_0 = 10e6
         self.variable_slider_1 = variable_slider_1 = 60e3
         self.samp_rate = samp_rate = variable_slider_0
 
         ##################################################
         # Blocks
         ##################################################
+        self.wxgui_fftsink2_0 = fftsink2.fft_sink_c(
+        	self.GetWin(),
+        	baseband_freq=0,
+        	y_per_div=10,
+        	y_divs=10,
+        	ref_level=0,
+        	ref_scale=2.0,
+        	sample_rate=samp_rate,
+        	fft_size=1024,
+        	fft_rate=15,
+        	average=False,
+        	avg_alpha=None,
+        	title="FFT Plot",
+        	peak_hold=False,
+        )
+        self.Add(self.wxgui_fftsink2_0.win)
         _variable_slider_1_sizer = wx.BoxSizer(wx.VERTICAL)
         self._variable_slider_1_text_box = forms.text_box(
         	parent=self.GetWin(),
@@ -73,22 +90,6 @@ class top_block(grc_wxgui.top_block_gui):
         	proportion=1,
         )
         self.Add(_variable_slider_1_sizer)
-        self.wxgui_fftsink2_0 = fftsink2.fft_sink_c(
-        	self.GetWin(),
-        	baseband_freq=0,
-        	y_per_div=10,
-        	y_divs=10,
-        	ref_level=0,
-        	ref_scale=2.0,
-        	sample_rate=samp_rate,
-        	fft_size=1024,
-        	fft_rate=15,
-        	average=False,
-        	avg_alpha=None,
-        	title="FFT Plot",
-        	peak_hold=False,
-        )
-        self.Add(self.wxgui_fftsink2_0.win)
         _variable_slider_0_sizer = wx.BoxSizer(wx.VERTICAL)
         self._variable_slider_0_text_box = forms.text_box(
         	parent=self.GetWin(),
@@ -105,7 +106,7 @@ class top_block(grc_wxgui.top_block_gui):
         	value=self.variable_slider_0,
         	callback=self.set_variable_slider_0,
         	minimum=0,
-        	maximum=10e6,
+        	maximum=100e6,
         	num_steps=100,
         	style=wx.SL_HORIZONTAL,
         	cast=float,
@@ -120,17 +121,17 @@ class top_block(grc_wxgui.top_block_gui):
         	),
         )
         self.uhd_usrp_sink_0.set_samp_rate(samp_rate)
-        self.uhd_usrp_sink_0.set_center_freq(2e9, 0)
-        self.uhd_usrp_sink_0.set_gain(30, 0)
+        self.uhd_usrp_sink_0.set_center_freq(4E9, 0)
+        self.uhd_usrp_sink_0.set_gain(10, 0)
+        self.uhd_usrp_sink_0.set_antenna("TX/RX", 0)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=2,
-        	bt=0.35,
+        	bt=100,
         	verbose=False,
         	log=False,
         )
-        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_float*1, variable_slider_1,True)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_float*1, "/home/javier/videotx.ts", False)
-        self.blks2_packet_encoder_0 = grc_blks2.packet_mod_f(grc_blks2.packet_encoder(
+        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_int*1, "127.0.0.1", 1234, 1500, False)
+        self.blks2_packet_encoder_0 = grc_blks2.packet_mod_i(grc_blks2.packet_encoder(
         		samples_per_symbol=2,
         		bits_per_symbol=1,
         		preamble="",
@@ -144,11 +145,9 @@ class top_block(grc_wxgui.top_block_gui):
         # Connections
         ##################################################
         self.connect((self.blks2_packet_encoder_0, 0), (self.digital_gmsk_mod_0, 0))    
-        self.connect((self.blocks_file_source_0, 0), (self.blocks_throttle_0, 0))    
-        self.connect((self.blocks_throttle_0, 0), (self.blks2_packet_encoder_0, 0))    
+        self.connect((self.blocks_udp_source_0, 0), (self.blks2_packet_encoder_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.uhd_usrp_sink_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.wxgui_fftsink2_0, 0))    
-
 
     def get_variable_slider_0(self):
         return self.variable_slider_0
@@ -166,7 +165,6 @@ class top_block(grc_wxgui.top_block_gui):
         self.variable_slider_1 = variable_slider_1
         self._variable_slider_1_slider.set_value(self.variable_slider_1)
         self._variable_slider_1_text_box.set_value(self.variable_slider_1)
-        self.blocks_throttle_0.set_sample_rate(self.variable_slider_1)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -177,9 +175,12 @@ class top_block(grc_wxgui.top_block_gui):
         self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
 
 
-if __name__ == '__main__':
-    parser = OptionParser(option_class=eng_option, usage="%prog: [options]")
-    (options, args) = parser.parse_args()
-    tb = top_block()
+def main(top_block_cls=top_block, options=None):
+
+    tb = top_block_cls()
     tb.Start(True)
     tb.Wait()
+
+
+if __name__ == '__main__':
+    main()

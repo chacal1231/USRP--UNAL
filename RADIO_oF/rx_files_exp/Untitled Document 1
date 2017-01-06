@@ -1,0 +1,9 @@
+Encontré que toca desactivar en propagate tags para evitar que salga ese error packet mayor a frame_len
+
+Además, para poder ver errores al menos la primera vez debe enviarse con buen SNR y después sí cambiarlo, y ahí si escribe los archivos
+
+Mirar en rx.txt
+
+Faltaría probar con el montaje a ver si llegan errores
+
+y comparar en el archivo caracter a caracter
